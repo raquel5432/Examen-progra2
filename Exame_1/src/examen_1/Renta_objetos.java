@@ -22,9 +22,9 @@ public class Renta_objetos {
         while (true) {
 
             String menu =
-                    "1) Agregar Ítem\n" +
-                    "2) Rentar Ítem\n" +
-                    "3) Ejecutar Submenú\n" +
+                    "1) Agregar Item\n" +
+                    "2) Rentar Item\n" +
+                    "3) Ejecutar Submenu\n" +
                     "4) Imprimir Todo\n" +
                     "5) Salir\n";
 
@@ -64,19 +64,19 @@ public class Renta_objetos {
         int tipo = JOptionPane.showOptionDialog(null, "Seleccione tipo:",
                 "Agregar", 0, 0, null, opciones, opciones[0]);
 
-        String cod = JOptionPane.showInputDialog("Código:");
+        String cod = JOptionPane.showInputDialog("Codigo:");
         if (codigoExiste(cod)) {
-            JOptionPane.showMessageDialog(null, "Código duplicado.");
+            JOptionPane.showMessageDialog(null, "Codigo duplicado.");
             return;
         }
 
         String nombre = JOptionPane.showInputDialog("Nombre:");
         ImageIcon img = cargarImagen();
 
-        if (tipo == 0) {  // MOVIE
+        if (tipo == 0) {  
             double precio = Double.parseDouble(JOptionPane.showInputDialog("Precio Base:"));
             items.add(new Movie(cod, nombre, precio, img));
-        } else {  // GAME
+        } else {  
             items.add(new Game(cod, nombre, img));
         }
 
@@ -90,7 +90,7 @@ public class Renta_objetos {
     }
 
     private static void rentarItem() {
-        String cod = JOptionPane.showInputDialog("Código:");
+        String cod = JOptionPane.showInputDialog("Codigo:");
         RentItem r = buscar(cod);
 
         if (r == null) {
@@ -98,17 +98,17 @@ public class Renta_objetos {
             return;
         }
 
-        JOptionPane.showMessageDialog(null, r.toString(), "Datos del Ítem",
+        JOptionPane.showMessageDialog(null, r.toString(), "Datos del Item",
                 JOptionPane.INFORMATION_MESSAGE, r.getImage());
 
-        int dias = Integer.parseInt(JOptionPane.showInputDialog("Días a rentar:"));
+        int dias = Integer.parseInt(JOptionPane.showInputDialog("Dias a rentar:"));
         double total = r.pagoRenta(dias);
 
         JOptionPane.showMessageDialog(null, "Total a pagar: " + total + " Lps");
     }
 
     private static void ejecutarSubmenu() {
-        String cod = JOptionPane.showInputDialog("Código:");
+        String cod = JOptionPane.showInputDialog("Codigo:");
         RentItem r = buscar(cod);
 
         if (r == null) {
@@ -119,7 +119,7 @@ public class Renta_objetos {
         if (r instanceof MenuActions) {
             ((MenuActions) r).submenu();
         } else {
-            JOptionPane.showMessageDialog(null, "Este ítem no tiene submenú.");
+            JOptionPane.showMessageDialog(null, "Este item no tiene submenu.");
         }
     }
 
